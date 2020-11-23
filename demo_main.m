@@ -1,4 +1,4 @@
-function demo_main(method_id, data_id, model_id, BurnIters, SamplingIters)
+function demo_main(method_id, data_id, model_id, BurnIters, SamplingIters, iters)
 % 
 % Perform amortized inference on latent variable models by minimizing the
 % VCD divergence
@@ -12,8 +12,10 @@ function demo_main(method_id, data_id, model_id, BurnIters, SamplingIters)
 %    (1=BernoulliVAE; 2=Gaussian MF; 3=Poisson MF; 4=Logistic MF)
 %  + BurnIters: Number of burn iterations in the HMC procedure
 %  + SamplingIters: Number of sampling iterations in the HMC procedure
+%  + iters: Number of iterations
 % 
 
+fprintf('method_id=%d, data_id=%d, model_id=%d, BurnIters=%d, SamplingIters=%d iters=%d\n', method_id, data_id, model_id, BurnIters, SamplingIters, iters);
 
 %% Specify setting
 if(method_id==1)
@@ -285,10 +287,6 @@ for layer=1:length(vae)-1
 end
 
 %% Main algorithm
-
-% Number of iterations
-iters = 400000;
-
 % Values to compute at each iteration
 stochasticDiv = zeros(1, iters);
 ELBO_q = zeros(1, iters);
